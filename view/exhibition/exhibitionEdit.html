@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    \{include file="../common/resource.html"\}
+    <!-- Snap.svg -->
+    <script src="../javascript/snap.svg.js"></script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        \{include file="../common/header.html"\}
+        \{include file="../common/menu.html"\}
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1></h1>
+            </section>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        \{if $error != ''\}
+                        <div class="alert alert-warning alert-dismissable text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4 style="display: inline;">\{$error\}</h4>
+                        </div>
+                        \{/if\}
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">編輯專題攤位</h3>
+                            </div>
+                            <!-- form-->
+                            <form class="form-horizontal" method="post" action="../controller/exhibitionController.php" enctype="multipart/form-data" onsubmit="return formValidation();">
+                                <div class="box-body">
+                                    <div id="nameDiv" class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">名稱</label>
+                                        <div class="col-sm-9">
+                                            <input id="name" name="name" type="text" class="form-control" placeholder="輸入名稱" value="\{$exhibition.name\}">
+                                        </div>
+                                    </div>
+                                    <div id="introductionDiv" class="form-group">
+                                        <label for="introduction" class="col-sm-3 control-label">介紹</label>
+                                        <div class="col-sm-9">
+                                            <input id="introduction" name="introduction" type="text" class="form-control" placeholder="輸入介紹" value="\{$exhibition.introduction\}">
+                                        </div>
+                                    </div>
+                                    <div id="position" class="form-group">
+                                        <div id="xDiv" style="display: inline">
+                                            <label for="x" class="col-sm-3 control-label">X座標</label>
+                                            <div class="col-sm-3">
+                                                <input id="x" name="x" type="text" class="form-control" placeholder="選取 X座標" value="\{$exhibition.x\}">
+                                            </div>
+                                        </div>
+                                        <div id="yDiv" style="display: inline">
+                                            <label for="y" class="col-sm-3 control-label">Y座標</label>
+                                            <div class="col-sm-3">
+                                                <input id="y" name="y" type="text" class="form-control" placeholder="選取 Y座標" value="\{$exhibition.y\}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 id="coord"></h5>
+                                    <div id="map-container" style="background-color: #FFFFCE">
+                                        <svg id="map-svg" style="width:100%"></svg>
+                                    </div>
+                                    <div id="img_pathDiv" class="form-group">
+                                        <label for="img_path" class="col-sm-3 control-label">圖片</label>
+                                        <div class="col-sm-9">
+                                            <input type="file" id="img_path" name="img_path" data-input="false">
+                                            <img id="img_pathImg" class="img-thumbnail" alt="圖片" src="\{$exhibition.img_path\}"/>
+                                        </div>
+                                    </div>
+                                    <div id="teacherDiv" class="form-group">
+                                        <label for="teacher" class="col-sm-3 control-label">指導老師</label>
+                                        <div class="col-sm-9">
+                                            <input id="teacher" name="teacher" type="text" class="form-control" placeholder="輸入指導老師" value="\{$exhibition.teacher\}">
+                                        </div>
+                                    </div>
+                                    <div id="emailDiv" class="form-group">
+                                        <label for="email" class="col-sm-3 control-label">聯絡信箱</label>
+                                        <div class="col-sm-9">
+                                            <input id="email" name="email" type="text" class="form-control" placeholder="輸入聯絡信箱" value="\{$exhibition.email\}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer" style="text-align: right;">
+                                    <a href="../controller/exhibitionController.php?action=viewExhibitionList" class="btn btn-warning">取消</a>
+                                    <input type="hidden" name="action" value="updateExhibition">
+                                    <input type="hidden" name="exhibitionId" value="\{$exhibition.exhibition_id\}">
+                                    <button type="submit" class="btn btn-primary">更新</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        \{include file="../common/footer.html"\}
+    </div>
+    <script src="../javascript/exhibition/exhibitionEdit.js"></script>
+</body>
+
+</html>

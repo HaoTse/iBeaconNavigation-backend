@@ -1,0 +1,68 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        \{if $smarty.session.isLogin\}
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header" style="color:#FFFFFF; font-size: 24px;">功 能 列 表</li>
+            \{if $smarty.session.user['competence'] == 0 \}
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-list"></i><span>使用者管理</span><i class="fa fa-angle-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../controller/userController.php?action=viewAddForm"><i class="fa fa-circle-o"></i>使用者新增</a></li>
+                    <li><a href="../controller/userController.php?action=viewUserList"><i class="fa fa-circle-o"></i>使用者列表</a></li>
+                </ul>
+            </li>
+            \{/if\}
+            \{if $smarty.session.user['competence'] < 2 \}
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-list"></i><span>Beacon管理</span><i class="fa fa-angle-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../controller/beaconController.php?action=viewAddForm"><i class="fa fa-circle-o"></i>新增Beacon</a></li>
+                    <li><a href="../controller/beaconController.php?action=viewBeaconList"><i class="fa fa-circle-o"></i>Beacon列表</a></li>
+                </ul>
+            </li>
+            \{/if\}
+            \{if $smarty.session.user['competence'] < 2 \}
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-list"></i><span>已知點管理</span><i class="fa fa-angle-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../controller/detectPointController.php?action=viewAddForm"><i class="fa fa-circle-o"></i>新增已知點</a></li>
+                    <li><a href="../controller/detectPointController.php?action=viewAddInfoForm"><i class="fa fa-circle-o"></i>新增已知點資訊</a></li>
+                    <li><a href="../controller/detectPointController.php?action=viewDetectPointList"><i class="fa fa-circle-o"></i>已知點列表</a></li>
+                </ul>
+            </li>
+            \{/if\}
+            \{if $smarty.session.user['competence'] < 2 \}
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-list"></i><span>專題攤位管理</span><i class="fa fa-angle-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../controller/exhibitionController.php?action=viewAddForm"><i class="fa fa-circle-o"></i>新增攤位</a></li>
+                    <li><a href="../controller/exhibitionController.php?action=viewExhibitionList"><i class="fa fa-circle-o"></i>攤位列表</a></li>
+                </ul>
+            </li>
+            \{/if\}
+            \{if $smarty.session.user['competence'] < 2 \}
+            <li>
+                <a href="#">
+                    <i class="fa fa-th-list"></i><span>學生管理</span><i class="fa fa-angle-down pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../controller/studentController.php?action=viewAddForm"><i class="fa fa-circle-o"></i>新增學生</a></li>
+                    <li><a href="../controller/studentController.php?action=viewStudentList"><i class="fa fa-circle-o"></i>學生列表</a></li>
+                </ul>
+            </li>
+            \{/if\}
+        </ul>
+        \{/if\}
+    </section>
+</aside>

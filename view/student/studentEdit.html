@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    \{include file="../common/resource.html"\}
+    <!-- Snap.svg -->
+    <script src="../javascript/snap.svg.js"></script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        \{include file="../common/header.html"\}
+        \{include file="../common/menu.html"\}
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1></h1>
+            </section>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        \{if $error != ''\}
+                        <div class="alert alert-warning alert-dismissable text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4 style="display: inline;">\{$error\}</h4>
+                        </div>
+                        \{/if\}
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">編輯學生</h3>
+                            </div>
+                            <!-- form-->
+                            <form class="form-horizontal" method="post" action="../controller/studentController.php" onsubmit="return formValidation();">
+                                <div class="box-body">
+                                    <div id="nameDiv" class="form-group">
+                                        <label for="name" class="col-sm-3 control-label">姓名</label>
+                                        <div class="col-sm-9">
+                                            <input id="name" name="name" type="text" class="form-control" placeholder="輸入姓名" value="\{$studentData.name\}">
+                                        </div>
+                                    </div>
+                                    <div id="exhibition_idDiv" class="form-group">
+                                        <label for="exhibition_id" class="col-sm-3 control-label">展場編號</label>
+                                        <div class="col-sm-9">
+                                            <input id="exhibition_id" name="exhibition_id" type="text" class="form-control" placeholder="輸入姓名" value="\{$studentData.exhibition_id\}" disabled="disabled">
+                                        </div>
+                                    </div>
+                                    <div id="phoneDiv" class="form-group">
+                                        <label for="phone" class="col-sm-3 control-label">連絡電話</label>
+                                        <div class="col-sm-9">
+                                            <input id="phone" name="phone" type="text" class="form-control" placeholder="輸入連絡電話" value="\{$studentData.phone\}">
+                                        </div>
+                                    </div>
+                                    <div id="emailDiv" class="form-group">
+                                        <label for="email" class="col-sm-3 control-label">email</label>
+                                        <div class="col-sm-9">
+                                            <input id="email" name="email" type="text" class="form-control" placeholder="輸入 email" value="\{$studentData.email\}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer" style="text-align: right;">
+                                    <a href="../controller/studentController.php?action=viewStudentList" class="btn btn-warning">取消</a>
+                                    <input type="hidden" name="action" value="updateStudent">
+                                    <input type="hidden" name="studentId" value="\{$studentData.student_id\}">
+                                    <button type="submit" class="btn btn-primary">更新</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        \{include file="../common/footer.html"\}
+    </div>
+    <script src="../javascript/student/studentEdit.js"></script>
+</body>
+
+</html>

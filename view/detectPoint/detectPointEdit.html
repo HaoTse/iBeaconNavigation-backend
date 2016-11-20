@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    \{include file="../common/resource.html"\}
+    <!-- Snap.svg -->
+    <script src="../javascript/snap.svg.js"></script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        \{include file="../common/header.html"\}
+        \{include file="../common/menu.html"\}
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1></h1>
+            </section>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-6">
+                        \{if $error != ''\}
+                        <div class="alert alert-warning alert-dismissable text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4 style="display: inline;">\{$error\}</h4>
+                        </div>
+                        \{/if\}
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">編輯已知點</h3>
+                            </div>
+                            <!-- form-->
+                            <form class="form-horizontal" method="post" action="../controller/detectPointController.php" onsubmit="return formValidation();">
+                                <div class="box-body">
+                                    <div id="position" class="form-group">
+                                        <div id="xDiv" style="display: inline">
+                                            <label for="x" class="col-sm-3 control-label">X座標</label>
+                                            <div class="col-sm-3">
+                                                <input id="x" name="x" type="text" class="form-control" placeholder="選取 X座標" value="\{$detectPointData.x\}">
+                                            </div>
+                                        </div>
+                                        <div id="yDiv" style="display: inline">
+                                            <label for="y" class="col-sm-3 control-label">Y座標</label>
+                                            <div class="col-sm-3">
+                                                <input id="y" name="y" type="text" class="form-control" placeholder="選取 Y座標" value="\{$detectPointData.y\}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 id="coord"></h5>
+                                    <div id="map-container" style="background-color: #FFFFCE">
+                                        <svg id="map-svg" style="width:100%"></svg>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer" style="text-align: right;">
+                                    <a href="../controller/detectPointController.php?action=viewDetectPointList" class="btn btn-warning">取消</a>
+                                    <input type="hidden" name="action" value="updateDetectPoint">
+                                    <input type="hidden" name="detectPointId" value="\{$detectPointData.point_id\}">
+                                    <button type="submit" class="btn btn-primary">更新</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        \{include file="../common/footer.html"\}
+    </div>
+    <script src="../javascript/detectPoint/detectPointEdit.js"></script>
+</body>
+
+</html>

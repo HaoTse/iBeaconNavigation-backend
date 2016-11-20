@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    \{include file="../common/resource.html"\}
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        \{include file="../common/header.html"\}
+        \{include file="../common/menu.html"\}
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1></h1>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <div class="col-xs-8">
+                        \{if $error != ''\}
+                        <div class="alert alert-warning alert-dismissable text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4 style="display: inline;">\{$error\}</h4>
+                        </div>
+                        \{/if\}
+                        \{if $msg != ''\}
+                        <div class="alert alert-success alert-dismissable text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4 style="display: inline;">\{$msg\}</h4>
+                        </div>
+                        \{/if\}
+                        <div class="box box-info">
+                            <div class="box-header">
+                                <h3 class="box-title">已知點資訊列表</h3>
+                            </div>
+                            <div class="box-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr style="background-color: #00c0ef;color: #fff;">
+                                            <th>已知點 ID</th>
+                                            <th>iBeacon 名稱</th>
+                                            <th>Rssi</th>
+                                            <th>操作選項</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        \{foreach from=$pointInfoData item=pointInfo\}
+                                        <tr>
+                                            <td>\{$pointInfo.point_id\}</td>
+                                            <td>\{$pointInfo.name\}</td>
+                                            <td>\{$pointInfo.rssi\}</td>
+                                            <td>
+                                                <a href="#">
+                                                    <button class="btn btn-sm btn-danger" onclick="deletePointInfo(\{$pointInfo.point_id\}, \{$pointInfo.beacon_id\});"><i class="glyphicon glyphicon-remove"></i></button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        \{/foreach\}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        \{include file="../common/footer.html"\}
+    </div>
+    <script src="../javascript/detectPoint/pointInfoList.js"></script>
+</body>
+
+</html>
