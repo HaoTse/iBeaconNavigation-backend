@@ -12,7 +12,7 @@ $(document).ready(function(){
                                 } );
 
     //init the location point
-    var location = point.circle(0, 0, 10);
+    var location = point.circle(0, 0);
     location.attr({id: "point", fill:"red"});
 
     //get current mouse position
