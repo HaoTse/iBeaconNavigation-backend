@@ -14,6 +14,8 @@ $(document).ready(function(){
     var location = point.circle(0, 0, 3);
     location.attr({id: "point", fill:"red"});
 
+    var location_check = point.circle(0, 0, 0);
+
     //get current mouse position
     $("#map-container").mousemove(function (e) {
         var loc = cursorPoint(e);
@@ -26,6 +28,8 @@ $(document).ready(function(){
         var pos = $("#position");
         pos.find("#x").val(loc.x);
         pos.find("#y").val(loc.y);
+
+        location_check.attr({cx: loc.x, cy: loc.y, r: 3, fill: "red"})
     });
 
     // Create an SVGPoint for future math
