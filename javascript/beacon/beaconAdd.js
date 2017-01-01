@@ -37,6 +37,7 @@ $(document).ready(function(){
         return pt.matrixTransform(s.node.getScreenCTM().inverse());
     }
 
+    var texts = s.group();
     // Use jquery ajax to get beacon data
     var beacons = s.group();
     $.ajax({
@@ -49,6 +50,12 @@ $(document).ready(function(){
             $.each(obj, function(i, item){
                 var beacon_location = beacons.circle(item.x, item.y, 3);
                 beacon_location.attr({id: item.name, fill: "green"});
+                beacon_location.mouseover(function(){
+                    var name = texts.text(item.x, item.y, item.name);
+                    name.attr({id: item.name + "_name"})
+                }).mouseout(function(){
+                    texts.select("#" + item.name + "_name").remove();
+                });
             });
         }
     });
