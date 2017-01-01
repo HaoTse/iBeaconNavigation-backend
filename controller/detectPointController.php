@@ -46,6 +46,9 @@ switch ($method) {
             case 'deletePointInfo':
                 $detectPoint->deletePointInfo($_GET);
                 break;
+            case 'getPointData':
+                $detectPoint->getPointData();
+                break;
             case 'logout':
                 $detectPoint->logout();
                 break;

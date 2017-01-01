@@ -34,6 +34,9 @@ switch ($method) {
             case 'deleteExhibition':
                 $exhibition->deleteExhibition($_GET);
                 break;
+            case 'getExhibitionData':
+                $exhibition->getExhibitionData();
+                break;
             case 'logout':
                 $exhibition->logout();
                 break;

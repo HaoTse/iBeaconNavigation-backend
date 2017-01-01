@@ -86,9 +86,9 @@ class Exhibition
 
                     if(!empty($_FILES) && $_FILES["img_path"]["error"] == 0){
                         $file_tmp = substr($_FILES['img_path']['name'], 0, 5);
-                            
+
                         $newFilePath = '../media/exhibition/'.uniqid($file_tmp, true);
-                    
+
                         move_uploaded_file($_FILES['img_path']['tmp_name'], $newFilePath);//複製檔案
                         try {
                             $sql = "UPDATE exhibition
@@ -201,7 +201,7 @@ class Exhibition
                     $file_tmp = substr($_FILES['img_path']['name'], 0, 5);
 
                     $newFilePath = '../media/exhibition/'.uniqid($file_tmp, true);
-                
+
                     move_uploaded_file($_FILES['img_path']['tmp_name'], $newFilePath);//複製檔案
                     try {
                         $sql = "UPDATE exhibition
@@ -215,7 +215,7 @@ class Exhibition
 
                             if(strpos($file[0]['img_path'], 'default') === false)
                                 unlink($file[0]['img_path']);
-                            
+
                             $this->error = '';
                             $this->msg = '更新成功';
                             $this->viewExhibitionList();
@@ -305,6 +305,26 @@ class Exhibition
         } else {
             $this->error = '請先登入!';
             $this->viewLogin();
+        }
+    }
+
+    /**
+     * 取得所有Exhibition分布位置
+     * @DateTime 2017-01-01
+     */
+    public function getExhibitionData()
+    {
+        try {
+            $sql = 'SELECT *
+                    FROM exhibition
+                    ORDER BY exhibition_id';
+            $res = $this->db->prepare($sql);
+            $res->execute();
+            $exhibitionData = $res->fetchAll();
+
+            echo json_encode($exhibitionData);
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage();
         }
     }
 

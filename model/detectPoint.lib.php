@@ -100,7 +100,7 @@ class DetectPoint
     {
         if ($_SESSION['isLogin'] == true) {
             try {
-                
+
                 $now  = date('Y-m-d H:i:s');
 
                 $sql = "INSERT INTO detect_point (x, y, create_date, lastupdate_date)
@@ -112,15 +112,15 @@ class DetectPoint
                 $res->bindParam(':lastupdateDate', $now, PDO::PARAM_STR);
 
                 if ($res->execute()) {
-                    $detectPointId      = $this->db->lastInsertId();
+                    $detectPointId = $this->db->lastInsertId();
                     $this->error = '';
-                    $this->viewDetectPointList();
+                    $this->viewAddForm();
                 } else {
                     $error = $res->errorInfo();
 
                     $this->error = $error[0];
                     $this->viewAddForm();
-                    
+
                 }
             } catch (PDOException $e) {
                 print "Error!: " . $e->getMessage();
@@ -170,7 +170,7 @@ class DetectPoint
 
                         $this->error = $error[0];
                         $this->viewAddInfoForm();
-                        
+
                     }
                 }
             } catch (PDOException $e) {
@@ -368,6 +368,26 @@ class DetectPoint
         } else {
             $this->error = '請先登入!';
             $this->viewLogin();
+        }
+    }
+
+    /**
+     * 取得所有Point分布位置
+     * @DateTime 2017-01-01
+     */
+    public function getPointData()
+    {
+        try {
+            $sql = 'SELECT *
+                    FROM detect_point
+                    ORDER BY point_id';
+            $res = $this->db->prepare($sql);
+            $res->execute();
+            $pointData = $res->fetchAll();
+
+            echo json_encode($pointData);
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage();
         }
     }
 
