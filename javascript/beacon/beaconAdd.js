@@ -38,6 +38,7 @@ $(document).ready(function(){
     }
 
     // Use jquery ajax to get beacon data
+    var beacons = s.group();
     $.ajax({
         url: "beaconController.php",
         type: "GET",
@@ -46,7 +47,8 @@ $(document).ready(function(){
         complete: function(data) {
             var obj = $.parseJSON(data.responseText);
             $.each(obj, function(i, item){
-                console.log(i, item);
+                var beacon_location = beacons.circle(item.x, item.y, 3);
+                beacon_location.attr({id: item.name, fill: "green"});
             });
         }
     });
