@@ -37,6 +37,9 @@ switch ($method) {
             case 'logout':
                 $beacon->logout();
                 break;
+            case 'getBeaconData':
+                $beacon->getBeaconData();
+                break;
             case 'view':
             default:
                 $beacon->viewLogin();

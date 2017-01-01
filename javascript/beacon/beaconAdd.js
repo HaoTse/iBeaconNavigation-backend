@@ -6,13 +6,12 @@ $(document).ready(function(){
 
     //load svg file
     var tux = Snap.load("../media/map/CSIE_1F.svg",  function ( loadedFragment ) {
-                                        var tmp = loadedFragment.select("#map").attr();
                                         s.attr("viewBox", loadedFragment.select("#map").attr("viewBox"));
                                         g.append( loadedFragment );
                                 } );
 
     //init the location point
-    var location = point.circle(0, 0, 10);
+    var location = point.circle(0, 0, 3);
     location.attr({id: "point", fill:"red"});
 
     //get current mouse position
@@ -37,6 +36,20 @@ $(document).ready(function(){
         pt.x = evt.clientX; pt.y = evt.clientY;
         return pt.matrixTransform(s.node.getScreenCTM().inverse());
     }
+
+    // Use jquery ajax to get beacon data
+    $.ajax({
+        url: "beaconController.php",
+        type: "GET",
+        dataType: "json",
+        data: "action=getBeaconData",
+        complete: function(data) {
+            var obj = $.parseJSON(data.responseText);
+            $.each(obj, function(i, item){
+                console.log(i, item);
+            });
+        }
+    });
 });
 
 function fieldValidation(field) {

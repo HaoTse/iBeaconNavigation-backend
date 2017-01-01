@@ -234,6 +234,26 @@ class Beacon
         }
     }
 
+    /**
+     * 取得所有Beacon分布位置
+     * @DateTime 2017-01-01
+     */
+    public function getBeaconData()
+    {
+        try {
+            $sql = 'SELECT *
+                    FROM ibeacon
+                    ORDER BY beacon_id';
+            $res = $this->db->prepare($sql);
+            $res->execute();
+            $beaconData = $res->fetchAll();
+
+            echo json_encode($beaconData);
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage();
+        }
+    }
+
     public function logout()
     {
         session_unset();
